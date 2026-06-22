@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CRM Mobile Viewer</title>
+<title>CRM 1&2-Electrical Viewer</title>
 <style>
 :root{
   color-scheme: dark;
@@ -307,7 +307,7 @@ h3{
 </div>
 
     <button class="refresh-btn"
-            onclick="refreshFromCloudWithAnimation()"
+           onclick="refreshCloudWithAnimation()"
             title="Refresh">
 
       🔄
@@ -622,7 +622,26 @@ function openProfile(staffValue){
       ${detail("Medical Due", med ? fmt(med.due) : "")}
     </div>
     <h3>Training History</h3>
-    <div class="history">${history(tr.map(t => `${safe(t.name)}<br><span class="row-meta">${fmt(t.date)}</span>`))}</div>
+    <div class="history">${
+
+
+history(tr.map(t =>
+
+`${safe(t.name)}
+
+<br>
+
+<span class="row-meta">
+${safe(t.duration || '')} ${safe(t.unit || '')}
+</span>
+
+<br>
+
+<span class="row-meta">
+${fmt(t.date)}
+</span>`
+
+))}</div>
     <h3>Medical History</h3>
     <div class="history">${history(md.map(m => `Medical: ${fmt(m.date)}<br><span class="row-meta">Due: ${fmt(m.due)}</span>`))}</div>
   `;
@@ -654,7 +673,23 @@ async function refreshCloudWithAnimation(){
 
 }
 
-document.getElementById("searchInput").addEventListener("input", renderLists);
+const searchBox =
+document.getElementById("searchInput");
+
+searchBox.addEventListener(
+    "input",
+    renderLists
+);
+
+searchBox.addEventListener(
+    "keyup",
+    renderLists
+);
+
+searchBox.addEventListener(
+    "search",
+    renderLists
+);
 
 
 document.getElementById("closeProfile").addEventListener("click", () => {
