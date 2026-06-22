@@ -682,16 +682,25 @@ document.getElementById("searchInput");
 
 function handleSearch(){
 
-    renderLists();
+    let q = searchBox.value.trim();
 
-    let q =
-    searchBox.value.trim();
+    if(!q) return;
 
-    if(q){
+    let emp =
+    (snapshot?.employees || [])
+    .find(e =>
+        String(e.staff).trim() === q
+    );
 
-        showSection("active");
+    if(emp){
 
-    }
+        openProfile(
+            encodeURIComponent(emp.staff)
+        );
+
+    
+
+}
 
 }
 
