@@ -676,21 +676,45 @@ async function refreshCloudWithAnimation(){
 const searchBox =
 document.getElementById("searchInput");
 
+function handleSearch(){
+
+    renderLists();
+
+    let q =
+    searchBox.value.trim();
+
+    if(!q) return;
+
+    let emp =
+    (snapshot?.employees || [])
+    .find(e =>
+        String(e.staff).trim() === q
+    );
+
+    if(emp){
+
+        openProfile(
+            encodeURIComponent(emp.staff)
+        );
+
+    }
+
+}
+
 searchBox.addEventListener(
     "input",
-    renderLists
+    handleSearch
 );
 
 searchBox.addEventListener(
     "keyup",
-    renderLists
+    handleSearch
 );
 
 searchBox.addEventListener(
     "search",
-    renderLists
+    handleSearch
 );
-
 
 document.getElementById("closeProfile").addEventListener("click", () => {
   document.getElementById("profile").classList.remove("open");
