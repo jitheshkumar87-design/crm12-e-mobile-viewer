@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -650,6 +650,7 @@ ${fmt(t.date)}
     <div class="history">${history(md.map(m => `Medical: ${fmt(m.date)}<br><span class="row-meta">Due: ${fmt(m.due)}</span>`))}</div>
   `;
   document.getElementById("profile").classList.add("open");
+document.getElementById("searchInput").value = "";
 }
 
 function detail(label,value){
@@ -682,14 +683,17 @@ document.getElementById("searchInput");
 
 function handleSearch(){
 
+    if(!snapshot || !snapshot.employees){
+        return;
+    }
+
     let q = searchBox.value.trim();
 
     if(!q) return;
 
     let emp =
-    (snapshot?.employees || [])
-    .find(e =>
-        String(e.staff).trim() === q
+    snapshot.employees.find(
+        e => String(e.staff).trim() === q
     );
 
     if(emp){
@@ -698,9 +702,7 @@ function handleSearch(){
             encodeURIComponent(emp.staff)
         );
 
-    
-
-}
+    }
 
 }
 
