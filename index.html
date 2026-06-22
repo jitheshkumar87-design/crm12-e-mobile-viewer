@@ -687,9 +687,11 @@ function handleSearch(){
     let q =
     searchBox.value.trim();
 
-    if(!q) return;
+    if(q){
 
-    alert("Searching: " + q);
+        showSection("active");
+
+    }
 
 }
 
