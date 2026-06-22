@@ -685,31 +685,7 @@ function handleSearch(){
 
     if(!q) return;
 
-let matches =
-(snapshot?.employees || [])
-.filter(e =>
-    String(e.staff)
-    .trim()
-    .includes(q)
-);
-
-if(matches.length === 1){
-
-    openProfile(
-        encodeURIComponent(
-            matches[0].staff
-        )
-    );
-
-}
-
-    if(emp){
-
-        openProfile(
-            encodeURIComponent(emp.staff)
-        );
-
-    }
+    alert("Searching: " + q);
 
 }
 
